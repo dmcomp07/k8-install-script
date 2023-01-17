@@ -1,5 +1,7 @@
 #!/bin/bash
 
+echo " This script works on CentOS 7.9 "
+
 # Update system
 sudo yum update -y
 
