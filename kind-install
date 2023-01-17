@@ -1,7 +1,5 @@
 #!/bin/bash
 
-echo " This script works on CentOS 7.9 "
-
 # Update system
 sudo yum update -y
 
@@ -28,6 +26,26 @@ rm -f /etc/containerd/config.toml
 # Restart containerd service
 systemctl restart containerd
 chkconfig --add containerd
+
+# Add Kubernetes repository
+cat << EOF > /etc/yum.repos.d/kubernetes.repo
+[kubernetes]
+name=Kubernetes
+baseurl=https://packages.cloud.google.com/yum/repos/kubernetes-el7-x86_64
+enabled=1
+gpgcheck=1
+repo_gpgcheck=1
+gpgkey=https://packages.cloud.google.com/yum/doc/yum-key.gpg
+        https://packages.cloud.google.com/yum/doc/rpm-package-key.gpg
+EOF
+
+
+
+# Install Kubernetes components
+yum install -y kubectl
+
+# Enable and start kubelet service
+#systemctl enable --now kubelet
 
 # Download and install Kind
 curl -Lo kind https://kind.sigs.k8s.io/dl/v0.11.0/kind-linux-amd64
