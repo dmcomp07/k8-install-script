@@ -1,5 +1,13 @@
 #!/bin/bash
 
+
+# Get the hostname
+echo "Enter the hostname:"
+read hostname
+hostnamectl set-hostname $hostname
+echo "`ip route get 1 | awk '{print $NF;exit}'` $hostname" >> /etc/hosts
+
+
 # Update system
 sudo yum update -y
 
