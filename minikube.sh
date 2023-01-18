@@ -94,4 +94,4 @@ sudo systemctl restart kubelet
 
 
 # Start minikube with containerd as the runtime
-minikube start --container-runtime=remote --container-runtime-endpoint=unix:///run/containerd/containerd.sock
+minikube start --driver=docker --force
