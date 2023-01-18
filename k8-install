@@ -1,5 +1,37 @@
 #!/bin/bash
-echo " This Script works on CentOS 7.9 "
+
+
+
+# Check for software prerequisites
+if ! [ -x "$(command -v curl)" ]; then
+  echo 'Error: curl is not installed.' >&2
+  exit 1
+fi
+if ! [ -x "$(command -v yum)" ]; then
+  echo 'Error: yum is not installed.' >&2
+  exit 1
+fi
+
+# Check for hardware prerequisites
+mem_size=$(cat /proc/meminfo | grep MemTotal | awk '{print $2}')
+if [[ $mem_size -lt 2097152 ]]; then
+  echo "Error: Your system does not meet the minimum memory requirement of 5GB for Minikube" >&2
+  exit 1
+fi
+
+num_cpus=$(nproc)
+if [[ $num_cpus -lt 2 ]]; then
+  echo "Error: Your system does not meet the minimum CPU requirement of 2 cores for Minikube" >&2
+  exit 1
+fi
+
+# Confirm with the user before proceeding
+read -p "This Script works on CentOS. Do you want to proceed with the installation of Kubeadm? (y/n) " -n 1 -r
+echo   
+if [[ ! $REPLY =~ ^[Yy]$ ]]
+then
+    exit 1
+fi
 
 # Get the hostname
 echo "Enter the hostname:"
