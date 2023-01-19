@@ -15,7 +15,7 @@ fi
 # Check for hardware prerequisites
 mem_size=$(cat /proc/meminfo | grep MemTotal | awk '{print $2}')
 if [[ $mem_size -lt 2097152 ]]; then
-  echo "Error: Your system does not meet the minimum memory requirement of 5GB for Minikube" >&2
+  echo "Error: Your system does not meet the minimum memory requirement of 2GB for Minikube" >&2
   exit 1
 fi
 
