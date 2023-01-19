@@ -98,8 +98,23 @@ source ~/.bashrc
 # Verify Kind installation
 kind version
 
+cat <<EOF > config.yml
+#three nodes (two worker & one master) cluster config
+kind: Cluster
+apiVersion: kind.x-k8s.io/v1alpha4
+
+nodes:
+- role: control-plane
+- role: worker
+- role: worker
+
+EOF
+
 # Create a cluster
-kind create cluster
+kind create cluster --config=config.yml
 
 # Verify installation
 kubectl cluster-info --context kind-kind
+
+#nodes list
+kubectl get nodes
