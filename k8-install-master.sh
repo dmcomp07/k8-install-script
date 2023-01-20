@@ -1,8 +1,15 @@
 #!/bin/bash
 
-echo "This script Install Kubernetes MASTER node on CentOS"
+echo "
+
+        #################################################################
+        #                                                               #
+        #       This Script Install Kubernetes Master Node on CentOS    #
+        #                                                               #
+        #################################################################
 
 
+"
 # Check for hardware prerequisites
 mem_size=$(cat /proc/meminfo | grep MemTotal | awk '{print $2}')
 echo "Minimum memory required : 2097152 KB"
