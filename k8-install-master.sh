@@ -1,5 +1,14 @@
 #!/bin/bash
 
+echo " This script Install Kubernets worker node on CentOS"
+
+# Confirm with the user before proceeding
+read -p "Do you want to proceed with the installation ? (y/n) " -n 1 -r
+echo   
+if [[ ! $REPLY =~ ^[Yy]$ ]]
+then
+    exit 1
+fi
 
 
 # Check for software prerequisites
@@ -25,13 +34,6 @@ if [[ $num_cpus -lt 2 ]]; then
   exit 1
 fi
 
-# Confirm with the user before proceeding
-read -p "This Script works on CentOS. Do you want to proceed with the installation of Kubeadm? (y/n) " -n 1 -r
-echo   
-if [[ ! $REPLY =~ ^[Yy]$ ]]
-then
-    exit 1
-fi
 
 # Get the hostname
 echo "Enter the hostname:"
