@@ -114,7 +114,7 @@ source ~/.bashrc
 kind version
 
 cat <<EOF > config.yml
-#three nodes (two worker & one master) cluster config
+# 4nodes (two worker & two master) cluster config
 kind: Cluster
 apiVersion: kind.x-k8s.io/v1alpha4
 
@@ -131,5 +131,7 @@ kind create cluster --config=config.yml
 # Verify installation
 kubectl cluster-info --context kind-kind
 
+echo " Kind cluster created with 2 Master + 2 workers "
+
 #nodes list
-kubectl get nodes
+kubectl get nodes 
