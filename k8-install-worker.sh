@@ -1,6 +1,25 @@
 #!/bin/bash
 
-echo " This script works on CentOS 7.9"
+echo " This script Install Kubernetes worker node on CentOS"
+
+# Confirm with the user before proceeding
+read -p "Do you want to proceed with the installation ? (y/n) " -n 1 -r
+echo   
+if [[ ! $REPLY =~ ^[Yy]$ ]]
+then
+    exit 1
+fi
+
+# Check for software prerequisites
+if ! [ -x "$(command -v curl)" ]; then
+  echo 'Error: curl is not installed.' >&2
+  exit 1
+fi
+if ! [ -x "$(command -v yum)" ]; then
+  echo 'Error: yum is not installed.' >&2
+  exit 1
+fi
+
 
 
 # Get the hostname
