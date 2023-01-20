@@ -1,6 +1,15 @@
 #!/bin/bash
 
-echo " This script Install Kubernetes worker node on CentOS"
+echo "
+
+        #################################################################
+        #                                                               #
+        #       This Script Install Kubernetes Worker Node on CentOS    #
+        #                                                               #
+        #################################################################
+
+
+"
 
 # Confirm with the user before proceeding
 read -p "Do you want to proceed with the installation ? (y/n) " -n 1 -r
