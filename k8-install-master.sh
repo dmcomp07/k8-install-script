@@ -1,10 +1,11 @@
 #!/bin/bash
 
-echo " This script Install Kubernetes MASTER node on CentOS"
+echo "This script Install Kubernetes MASTER node on CentOS"
 
 
 # Check for hardware prerequisites
 mem_size=$(cat /proc/meminfo | grep MemTotal | awk '{print $2}')
+echo "Minimum memory required : 2097152 KB"
 echo "Available memory : $mem_size KB "
 if [[ $mem_size -lt 2097152 ]]; then
   echo "Error: Your system does not meet the minimum memory requirement of 2GB " >&2
@@ -12,7 +13,8 @@ if [[ $mem_size -lt 2097152 ]]; then
 fi
 
 num_cpus=$(nproc)
-echo "Available CPU : $num_cpus cores"
+echo "Minimum CPU cores required : 2 cores"
+echo "Available CPU cores : $num_cpus cores"
 if [[ $num_cpus -lt 2 ]]; then
   echo "Error: Your system does not meet the minimum CPU requirement of 2 cores " >&2
   exit 1
