@@ -1,5 +1,14 @@
 #!/bin/bash
 
+echo " This script Install Kubernetes MINIKUBE on CentOS"
+
+# Confirm with the user before proceeding
+read -p "Do you want to proceed with the installation ? (y/n) " -n 1 -r
+echo   
+if [[ ! $REPLY =~ ^[Yy]$ ]]
+then
+    exit 1
+fi
 
 
 # Check for software prerequisites
@@ -23,14 +32,6 @@ num_cpus=$(nproc)
 if [[ $num_cpus -lt 2 ]]; then
   echo "Error: Your system does not meet the minimum CPU requirement of 2 cores for Minikube" >&2
   exit 1
-fi
-
-# Confirm with the user before proceeding
-read -p "Do you want to proceed with the installation of Minikube? (y/n) " -n 1 -r
-echo   
-if [[ ! $REPLY =~ ^[Yy]$ ]]
-then
-    exit 1
 fi
 
 
