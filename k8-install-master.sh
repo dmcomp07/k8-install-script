@@ -2,24 +2,6 @@
 
 echo " This script Install Kubernetes MASTER node on CentOS"
 
-# Confirm with the user before proceeding
-read -p "Do you want to proceed with the installation ? (y/n) " -n 1 -r
-echo   
-if [[ ! $REPLY =~ ^[Yy]$ ]]
-then
-    exit 1
-fi
-
-
-# Check for software prerequisites
-if ! [ -x "$(command -v curl)" ]; then
-  echo 'Error: curl is not installed.' >&2
-  exit 1
-fi
-if ! [ -x "$(command -v yum)" ]; then
-  echo 'Error: yum is not installed.' >&2
-  exit 1
-fi
 
 # Check for hardware prerequisites
 mem_size=$(cat /proc/meminfo | grep MemTotal | awk '{print $2}')
@@ -36,7 +18,23 @@ if [[ $num_cpus -lt 2 ]]; then
   exit 1
 fi
 
+# Confirm with the user before proceeding
+read -p "Do you want to proceed with the installation ? (y/n) " -n 1 -r
+echo   
+if [[ ! $REPLY =~ ^[Yy]$ ]]
+then
+    exit 1
+fi
 
+# Check for software prerequisites
+if ! [ -x "$(command -v curl)" ]; then
+  echo 'Error: curl is not installed.' >&2
+  exit 1
+fi
+if ! [ -x "$(command -v yum)" ]; then
+  echo 'Error: yum is not installed.' >&2
+  exit 1
+fi
 
 # Get the hostname
 echo "Enter the hostname:"
