@@ -100,7 +100,7 @@ EOF
 yum install -y kubectl
 
 # Enable and start kubelet service
-#systemctl enable --now kubelet
+systemctl enable --now kubelet
 
 # Download and install Kind
 curl -Lo kind https://kind.sigs.k8s.io/dl/v0.11.0/kind-linux-amd64
