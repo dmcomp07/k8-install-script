@@ -11,10 +11,7 @@ How to Insatall using scripts ?
    sit tight and wait for Successful Installation.
 
 
-
-
-
-'''bash
+```
 
 #This script collects all scripts on Github repository and provide option to Install on CentOS/ Ubuntu
 
@@ -72,4 +69,4 @@ chmod +x \$script_name
 EOF
 chmod +x k10.sh
 ./k10.sh
-'''
+```
