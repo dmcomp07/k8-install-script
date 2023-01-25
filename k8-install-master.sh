@@ -90,6 +90,7 @@ systemctl enable docker
 yum install -y containerd.io
 rm -f /etc/containerd/config.toml
 
+
 # Restart containerd service
 systemctl restart containerd
 chkconfig --add containerd
@@ -226,7 +227,21 @@ apt-get install -y apt-transport-https ca-certificates curl software-properties-
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add -
 add-apt-repository -y "deb [arch=amd64] https://download.docker.com/linux/ubuntu \$(lsb_release -cs) stable"
 apt-get update -y
-apt-get install -y docker-ce
+apt-get -y install docker-ce docker-ce-cli docker-compose-plugin --skip-broken
+
+systemctl start docker
+systemctl enable docker
+
+
+# Remove containerd config file
+apt-get install -y containerd.io
+rm -f /etc/containerd/config.toml
+
+# Restart containerd service
+systemctl restart containerd
+systemctl enable containerd
+sudo swapoff -a
+
 
 # Set sysctl net.bridge.bridge-nf-call-iptables to 1
 echo "net.bridge.bridge-nf-call-iptables = 1" >> /etc/sysctl.conf
@@ -267,7 +282,7 @@ kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/cont
 #Cluster join link
 clear
 echo " Installation Successfull "
-echo " use below "
+echo " use below Token "
 kubeadm token create --print-join-command
 
 EOF
