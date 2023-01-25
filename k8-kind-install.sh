@@ -121,7 +121,7 @@ source ~/.bashrc
 kind version
 
 
-
+printf "
 #three nodes (two worker & one master) cluster config
 kind: Cluster
 apiVersion: kind.x-k8s.io/v1alpha4
@@ -186,7 +186,7 @@ if [[ \$num_cpus -lt 2 ]]; then
 fi
 
 # Confirm with the user before proceeding
-read -p "Do you want to proceed with the installation ? y/n " -n 1 -r
+read -p "Do you want to proceed with the installation ? (y/n) " -n 1 -r
 echo   
 if [[ ! \$REPLY =~ ^[Yy]\$ ]]
 then
