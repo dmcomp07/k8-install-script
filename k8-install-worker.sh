@@ -149,18 +149,18 @@ echo "
 
 "
 # Check for hardware prerequisites
-mem_size=\\$(cat /proc/meminfo | grep MemTotal | awk '{print \\$2}')
+mem_size=\$(cat /proc/meminfo | grep MemTotal | awk '{print \$2}')
 echo "Minimum memory required : 1048576 KB"
-echo "Available memory : \\$mem_size KB "
-if [[ \\$mem_size -lt 1048576 ]]; then
+echo "Available memory : \$mem_size KB "
+if [[ \$mem_size -lt 1048576 ]]; then
   echo "Error: Your system does not meet the minimum memory requirement of 1GB " >&2
   exit 1
 fi
 
-num_cpus=\\$(nproc)
+num_cpus=\$(nproc)
 echo "Minimum CPU cores required : 1 cores"
-echo "Available CPU cores : \\$num_cpus cores"
-if [[ \\$num_cpus -lt 1 ]]; then
+echo "Available CPU cores : \$num_cpus cores"
+if [[ \$num_cpus -lt 1 ]]; then
   echo "Error: Your system does not meet the minimum CPU requirement of 1 core " >&2
   exit 1
 fi
@@ -205,7 +205,7 @@ apt-get update -y
 # Install docker
 apt-get install -y apt-transport-https ca-certificates curl software-properties-common
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add -
-add-apt-repository -y "deb [arch=amd64] https://download.docker.com/linux/ubuntu \\$(lsb_release -cs) stable"
+add-apt-repository -y "deb [arch=amd64] https://download.docker.com/linux/ubuntu \$(lsb_release -cs) stable"
 apt-get update -y
 apt-get -y install docker-ce docker-ce-cli docker-compose-plugin --skip-broken
 
