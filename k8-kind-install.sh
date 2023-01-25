@@ -122,6 +122,7 @@ kind version
 
 
 printf "
+
 #2 nodes (1 worker & 1 master) cluster config
 kind: Cluster
 apiVersion: kind.x-k8s.io/v1alpha4
@@ -207,45 +208,35 @@ read hostname
 hostnamectl set-hostname \$hostname
 echo "`ip route get 1 | awk '{print \$NF;exit}'` \$hostname" >> /etc/hosts
 
-# Update system
+
+# Install dependencies if not already installed
 sudo apt-get update -y
-sudo apt-get -o upgrade -y
-# Install dependencies
-sudo apt-get install -y conntrack socat
-
-# Install necessary packages
-sudo apt-get install -y apt-transport-https ca-certificates curl software-properties-common
-
-# Install docker
-curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
-sudo add-apt-repository -y "deb [arch=amd64] https://download.docker.com/linux/ubuntu \$(lsb_release -cs) stable"
-apt-get -y install docker.io
-sudo apt-get update -y
-sudo apt-get install -y docker-ce docker-ce-cli containerd.io
-
+apt-get -y -o upgrade
+apt-get install -y apt-transport-https ca-certificates curl socat conntrack containerd software-properties-common docker-ce docker-ce-cli docker-compose-plugin
+   
+apt-get install -y docker.io
 systemctl start docker
 systemctl enable docker
 
-# Add Kubernetes repository
+rm -f /etc/containerd/config.toml
+systemctl restart containerd
+systemctl enable containerd
+
+
+# Add Kubernetes apt repository
 curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
 echo "deb https://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee -a /etc/apt/sources.list.d/kubernetes.list
+
+# Install kubectl
 sudo apt-get update -y
-
-# Install Kubernetes components
-sudo apt-get install -y kubectl
-
-# Enable and start kubelet service
-sudo systemctl enable --now kubelet
-
-# Download and install Kind
+sudo apt-get install -y kubectl kubelet
+systemctl enable --now kubelet
 curl -Lo kind https://kind.sigs.k8s.io/dl/v0.11.0/kind-linux-amd64
 chmod +x kind
 sudo mv kind /usr/local/bin/
-echo "export PATH=\$PATH:/usr/local/bin" >> ~/.bashrc
+echo "export PATH=\\$PATH:/usr/local/bin" >> ~/.bashrc
 source ~/.bashrc
 
-# Verify Kind installation
-kind version
 
 printf "
 #2 nodes (1 worker & 1 master) cluster config
@@ -264,9 +255,10 @@ kind create cluster --config=config.yml
 
 # Verify installation
 kubectl cluster-info --context kind-kind
-echo " Kind cluster created with 2 Master + 2 workers "
+echo " Kind cluster created with 1 Master + 1 worker "
 #nodes list
 kubectl get nodes
+
 EOF
 
 chmod +x k8.sh
