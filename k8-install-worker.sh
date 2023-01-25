@@ -207,6 +207,7 @@ apt-get update -y
 apt-get install -y apt-transport-https ca-certificates curl software-properties-common
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add -
 add-apt-repository -y "deb [arch=amd64] https://download.docker.com/linux/ubuntu \$(lsb_release -cs) stable"
+apt-get -y install docker.io
 apt-get update -y
 apt-get -y install docker-ce docker-ce-cli docker-compose-plugin --skip-broken
 
