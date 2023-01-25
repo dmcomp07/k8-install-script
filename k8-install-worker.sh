@@ -20,18 +20,18 @@ echo "
 
 
 # Check for hardware prerequisites
-mem_size=$(cat /proc/meminfo | grep MemTotal | awk '{print $2}')
+mem_size=\$(cat /proc/meminfo | grep MemTotal | awk '{print \$2}')
 echo "Minimum memory required : 1048576 KB"
-echo "Available memory : $mem_size KB "
-if [[ $mem_size -lt 1048576 ]]; then
+echo "Available memory : \$mem_size KB "
+if [[ \$mem_size -lt 1048576 ]]; then
   echo "Error: Your system does not meet the minimum memory requirement of 1 GB " >&2
   exit 1
 fi
 
-num_cpus=$(nproc)
+num_cpus=\$(nproc)
 echo "Minimum CPU cores required : 1 cores"
-echo "Available CPU cores : $num_cpus cores"
-if [[ $num_cpus -lt 1 ]]; then
+echo "Available CPU cores : \$num_cpus cores"
+if [[ \$num_cpus -lt 1 ]]; then
   echo "Error: Your system does not meet the minimum CPU requirement of 1 cores " >&2
   exit 1
 fi
@@ -40,17 +40,17 @@ fi
 # Confirm with the user before proceeding
 read -p "Do you want to proceed with the installation ? (y/n) " -n 1 -r
 echo   
-if [[ ! $REPLY =~ ^[Yy]$ ]]
+if [[ ! \$REPLY =~ ^[Yy]\$ ]]
 then
     exit 1
 fi
 
 # Check for software prerequisites
-if ! [ -x "$(command -v curl)" ]; then
+if ! [ -x "\$(command -v curl)" ]; then
   echo 'Error: curl is not installed.' >&2
   exit 1
 fi
-if ! [ -x "$(command -v yum)" ]; then
+if ! [ -x "\$(command -v yum)" ]; then
   echo 'Error: yum is not installed.' >&2
   exit 1
 fi
@@ -60,8 +60,8 @@ fi
 # Get the hostname
 echo "Enter the hostname:"
 read hostname
-hostnamectl set-hostname $hostname
-echo "`ip route get 1 | awk '{print $NF;exit}'` $hostname" >> /etc/hosts
+hostnamectl set-hostname \$hostname
+echo "`ip route get 1 | awk '{print \$NF;exit}'` \$hostname" >> /etc/hosts
 
 
 # Update the package list and upgrade all packages
@@ -105,7 +105,7 @@ sysctl --system
 
 # Set SELinux in permissive mode
 setenforce 0
-sed -i 's/^SELINUX=enforcing$/SELINUX=permissive/' /etc/selinux/config
+sed -i 's/^SELINUX=enforcing\$/SELINUX=permissive/' /etc/selinux/config
 
 # Add ports to firewall
 sudo firewall-cmd --permanent --add-port=10251/tcp
@@ -148,20 +148,19 @@ echo "
 
 
 "
-
 # Check for hardware prerequisites
-mem_size=\$(cat /proc/meminfo | grep MemTotal | awk '{print \$2}')
+mem_size=\\$(cat /proc/meminfo | grep MemTotal | awk '{print \\$2}')
 echo "Minimum memory required : 1048576 KB"
-echo "Available memory : \$mem_size KB "
-if [[ \$mem_size -lt 1048576 ]]; then
+echo "Available memory : \\$mem_size KB "
+if [[ \\$mem_size -lt 1048576 ]]; then
   echo "Error: Your system does not meet the minimum memory requirement of 1GB " >&2
   exit 1
 fi
 
-num_cpus=\$(nproc)
+num_cpus=\\$(nproc)
 echo "Minimum CPU cores required : 1 cores"
-echo "Available CPU cores : \$num_cpus cores"
-if [[ \$num_cpus -lt 1 ]]; then
+echo "Available CPU cores : \\$num_cpus cores"
+if [[ \\$num_cpus -lt 1 ]]; then
   echo "Error: Your system does not meet the minimum CPU requirement of 1 core " >&2
   exit 1
 fi
@@ -170,17 +169,17 @@ fi
 # Confirm with the user before proceeding
 read -p "Do you want to proceed with the installation ? (y/n) " -n 1 -r
 echo   
-if [[ ! $REPLY =~ ^[Yy]$ ]]
+if [[ ! \$REPLY =~ ^[Yy]\$ ]]
 then
     exit 1
 fi
 
 # Check for software prerequisites
-if ! [ -x "$(command -v curl)" ]; then
+if ! [ -x "\$(command -v curl)" ]; then
   echo 'Error: curl is not installed.' >&2
   exit 1
 fi
-if ! [ -x "$(command -v apt-get)" ]; then
+if ! [ -x "\$(command -v apt-get)" ]; then
   echo 'Error: apt-get is not installed.' >&2
   exit 1
 fi
@@ -188,13 +187,12 @@ fi
 # Get the hostname
 echo "Enter the hostname:"
 read hostname
-hostnamectl set-hostname $hostname
-echo "`ip route get 1 | awk '{print $NF;exit}'` $hostname" >> /etc/hosts
+hostnamectl set-hostname \$hostname
+echo "`ip route get 1 | awk '{print \$NF;exit}'` \$hostname" >> /etc/hosts
 
 
 # Update the package list and upgrade all packages
 apt-get update -y
-apt-get -o upgrade -y
 
 # Add Kubernetes repository
 curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add -
@@ -207,8 +205,7 @@ apt-get update -y
 # Install docker
 apt-get install -y apt-transport-https ca-certificates curl software-properties-common
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add -
-add-apt-repository -y "deb [arch=amd64] https://download.docker.com/linux/ubuntu \$(lsb_release -cs) stable"
-apt-get -y install docker.io
+add-apt-repository -y "deb [arch=amd64] https://download.docker.com/linux/ubuntu \\$(lsb_release -cs) stable"
 apt-get update -y
 apt-get -y install docker-ce docker-ce-cli docker-compose-plugin --skip-broken
 
