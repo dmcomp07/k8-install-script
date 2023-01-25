@@ -1,4 +1,4 @@
-# kubernetes Installation Scripts
+# Kubernetes Installation Scripts
 scripts for the installation of Kubernetes Master Node, Worker Node, Kubernetes Kind and Minikube on CentOS/ Ubuntu operating system. 
 These scripts simplify the process of setting up a Kubernetes cluster and make it easy for developers to get started with Kubernetes.
 
