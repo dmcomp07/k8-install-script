@@ -150,21 +150,22 @@ echo "
 "
 
 # Check for hardware prerequisites
-mem_size=$(free -k | grep Mem | awk '{print $2}')
+mem_size=\$(cat /proc/meminfo | grep MemTotal | awk '{print \$2}')
 echo "Minimum memory required : 1048576 KB"
-echo "Available memory : $mem_size KB "
-if [[ $mem_size -lt 1048576 ]]; then
-  echo "Error: Your system does not meet the minimum memory requirement of 1 GB " >&2
+echo "Available memory : \$mem_size KB "
+if [[ \$mem_size -lt 1048576 ]]; then
+  echo "Error: Your system does not meet the minimum memory requirement of 1GB " >&2
   exit 1
 fi
 
-num_cpus=$(nproc)
+num_cpus=\$(nproc)
 echo "Minimum CPU cores required : 1 cores"
-echo "Available CPU cores : $num_cpus cores"
-if [[ $num_cpus -lt 1 ]]; then
-  echo "Error: Your system does not meet the minimum CPU requirement of 1 cores " >&2
+echo "Available CPU cores : \$num_cpus cores"
+if [[ \$num_cpus -lt 1 ]]; then
+  echo "Error: Your system does not meet the minimum CPU requirement of 1 core " >&2
   exit 1
 fi
+
 
 # Confirm with the user before proceeding
 read -p "Do you want to proceed with the installation ? (y/n) " -n 1 -r
