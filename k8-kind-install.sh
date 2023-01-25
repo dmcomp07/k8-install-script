@@ -122,14 +122,12 @@ kind version
 
 
 printf "
-#three nodes (two worker & one master) cluster config
+#2 nodes (1 worker & 1 master) cluster config
 kind: Cluster
 apiVersion: kind.x-k8s.io/v1alpha4
 
 nodes:
 - role: control-plane
-- role: control-plane
-- role: worker
 - role: worker
 
 
@@ -249,14 +247,12 @@ source ~/.bashrc
 kind version
 
 printf "
-#three nodes (two worker & one master) cluster config
+#2 nodes (1 worker & 1 master) cluster config
 kind: Cluster
 apiVersion: kind.x-k8s.io/v1alpha4
 
 nodes:
 - role: control-plane
-- role: control-plane
-- role: worker
 - role: worker
 " > config.yml
 
