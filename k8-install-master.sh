@@ -137,7 +137,7 @@ kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/cont
 #Cluster join link
 clear
 echo " Installation Successfull "
-echo " use below "
+echo " Run below Token on worker node to join cluster "
 kubeadm token create --print-join-command
 
 
@@ -282,7 +282,7 @@ kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/cont
 #Cluster join link
 clear
 echo " Installation Successfull "
-echo " use below Token "
+echo " Run below Token on worker node to join cluster "
 kubeadm token create --print-join-command
 
 EOF
