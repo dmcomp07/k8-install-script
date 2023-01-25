@@ -1,9 +1,9 @@
-# k8-install-script
+# kubernetes Installation Scripts
 scripts for the installation of Kubernetes Master Node, Worker Node, Kubernetes Kind and Minikube on CentOS/ Ubuntu operating system. 
 These scripts simplify the process of setting up a Kubernetes cluster and make it easy for developers to get started with Kubernetes.
 
 
-How to Install use these scripts for Installation ?
+# How use these scripts for Installation ?
 1. Download or just Copy-paste scripts from repository and use
 2. Use another scipt written below: just Copy- paste to CentOS / Ubuntu  & follow Instructions.
    it'll list all available scripts, select the script you want to install and that's it. 
