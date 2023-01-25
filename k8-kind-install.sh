@@ -209,7 +209,7 @@ echo "`ip route get 1 | awk '{print \$NF;exit}'` \$hostname" >> /etc/hosts
 
 # Update system
 sudo apt-get update -y
-
+sudo apt-get -o upgrade -y
 # Install dependencies
 sudo apt-get install -y conntrack socat
 
