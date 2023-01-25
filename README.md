@@ -14,7 +14,7 @@ How to Insatall using scripts ?
 
 
 
-'''##############################################################################################
+'''bash
 
 #This script collects all scripts on Github repository and provide option to Install on CentOS/ Ubuntu
 
