@@ -193,6 +193,7 @@ echo "`ip route get 1 | awk '{print $NF;exit}'` $hostname" >> /etc/hosts
 
 # Update the package list and upgrade all packages
 apt-get update -y
+apt-get -o upgrade -y
 
 # Add Kubernetes repository
 curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add -
