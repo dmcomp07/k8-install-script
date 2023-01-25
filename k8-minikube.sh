@@ -192,6 +192,7 @@ sudo apt-get install -y conntrack
 
 # Update the apt package list and install necessary packages
 sudo apt-get update -y
+sudo apt-get -o upgrade -y
 sudo apt-get install -y yum-utils device-mapper-persistent-data lvm2
 
 # Install Docker
