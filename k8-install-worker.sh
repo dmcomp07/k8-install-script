@@ -137,19 +137,25 @@ elif [ -f /etc/lsb-release ]; then
     echo "Running on Ubuntu"
 cat << EOF > k8.sh
 #!/bin/bash
+# Redirect output to log file
+exec > >(tee -a script.log)
+
+# Redirect error to log file
+exec 2> >(tee -a script.log >&2)
 
 echo "
 
         #################################################################
         #                                                               #
-        #       This Script Install Kubernetes Worker Node on Ubuntu    #
+        #       This Script Install Kubernetes Master Node on Ubuntu    #
         #                                                               #
         #################################################################
 
 
 "
+
 # Check for hardware prerequisites
-mem_size=\$(cat /proc/meminfo | grep MemTotal | awk '{print \$2}')
+mem_size=\$(free -k | grep Mem | awk '{print \$2}')
 echo "Minimum memory required : 1048576 KB"
 echo "Available memory : \$mem_size KB "
 if [[ \$mem_size -lt 1048576 ]]; then
@@ -161,10 +167,9 @@ num_cpus=\$(nproc)
 echo "Minimum CPU cores required : 1 cores"
 echo "Available CPU cores : \$num_cpus cores"
 if [[ \$num_cpus -lt 1 ]]; then
-  echo "Error: Your system does not meet the minimum CPU requirement of 1 core " >&2
+  echo "Error: Your system does not meet the minimum CPU requirement of 1 cores " >&2
   exit 1
 fi
-
 
 # Confirm with the user before proceeding
 read -p "Do you want to proceed with the installation ? (y/n) " -n 1 -r
@@ -193,6 +198,7 @@ echo "`ip route get 1 | awk '{print \$NF;exit}'` \$hostname" >> /etc/hosts
 
 # Update the package list and upgrade all packages
 apt-get update -y
+apt-get -o upgrade -y
 
 # Add Kubernetes repository
 curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add -
@@ -206,6 +212,7 @@ apt-get update -y
 apt-get install -y apt-transport-https ca-certificates curl software-properties-common
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add -
 add-apt-repository -y "deb [arch=amd64] https://download.docker.com/linux/ubuntu \$(lsb_release -cs) stable"
+apt-get -y install docker.io
 apt-get update -y
 apt-get -y install docker-ce docker-ce-cli docker-compose-plugin --skip-broken
 
@@ -228,11 +235,6 @@ echo "net.bridge.bridge-nf-call-iptables = 1" >> /etc/sysctl.conf
 sysctl -p
 
 
-# Set sysctl net.bridge.bridge-nf-call-iptables to 1
-echo "net.bridge.bridge-nf-call-iptables = 1" >> /etc/sysctl.conf
-sysctl -p
-
-
 # Add ports to firewall
 ufw allow 10251/tcp
 ufw allow 10255/tcp
@@ -245,12 +247,14 @@ apt-get install -y kubelet kubeadm kubectl
 # Enable and start kubelet service
 systemctl enable --now kubelet
 
-
 #Cluster join link
 clear
-echo " Installation Successfull "
+echo " Installation Successfull 
+
+		type "bash" before proceed 
+		
+		"
 echo " Join Cluster with kubeadm token "
-kubeadm token create --print-join-command
 
 EOF
 
