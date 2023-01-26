@@ -156,7 +156,14 @@ elif [ -f /etc/lsb-release ]; then
     # code for Ubuntu
     echo "Running on Ubuntu"
 cat << EOF > k8.sh
+
 #!/bin/bash
+
+# Redirect output to log file
+exec > >(tee -a script.log)
+
+# Redirect error to log file
+exec 2> >(tee -a script.log >&2)
 
 echo "
 
@@ -283,9 +290,15 @@ kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/cont
 
 #Cluster join link
 clear
-echo " Installation Successfull "
+echo " Installation Successfull 
+
+		type "bash" before proceed 
+		
+		"
 echo " Run below Token on worker node to join cluster "
 kubeadm token create --print-join-command
+
+
 
 EOF
 
