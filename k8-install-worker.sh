@@ -119,7 +119,7 @@ yum install -y kubelet kubeadm kubectl
 systemctl enable --now kubelet
 
 clear
-echo " Installation Successfull "
+echo " Installation Successful "
 echo " Join Cluster with kubeadm token "
 
 
@@ -249,7 +249,7 @@ systemctl enable --now kubelet
 
 #Cluster join link
 clear
-echo " Installation Successfull 
+echo " Installation Successful 
 
 		type "bash" before proceed 
 		
