@@ -140,7 +140,7 @@ kind create cluster --config=config.yml
 
 # Verify installation
 kubectl cluster-info --context kind-kind
-echo " Kind cluster created with 2 Master + 2 workers "
+echo " Kind cluster created with 1 Master + 1 workers "
 #nodes list
 kubectl get nodes 
 
