@@ -15,7 +15,7 @@ These scripts simplify the process of setting up a Kubernetes cluster and make i
 
 #This script collects all scripts on Github repository and provide option to Install on CentOS/ Ubuntu
 
-
+sudo su
 cat <<EOF > k10.sh
 
 #!/bin/bash
