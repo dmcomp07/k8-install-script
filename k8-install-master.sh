@@ -140,7 +140,7 @@ sudo chown \$(id -u):\$(id -g) \$HOME/.kube/config
 
 
 #Deploy a pod network
-kubectl apply -f https://docs.projectcalico.org/v3.14/manifests/calico.yaml
+kubectl apply -f https://docs.projectcalico.org/v3.25/manifests/calico.yaml
 
 kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v0.49.0/deploy/static/provider/baremetal/deploy.yaml
 
@@ -304,7 +304,7 @@ sudo chown \$(id -u):\$(id -g) \$HOME/.kube/config
 
 
 #Deploy a pod network
-kubectl apply -f https://docs.projectcalico.org/v3.14/manifests/calico.yaml
+kubectl apply -f https://docs.projectcalico.org/v3.25/manifests/calico.yaml
 
 kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v0.49.0/deploy/static/provider/baremetal/deploy.yaml
 
