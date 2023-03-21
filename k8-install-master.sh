@@ -59,6 +59,11 @@ hostnamectl set-hostname \$hostname
 echo "`ip route get 1 | awk '{print \$NF;exit}'` \$hostname" >> /etc/hosts
 
 
+# Update the package list and upgrade all packages
+yum update -y
+
+# Install necessary packages
+yum install -y yum-utils device-mapper-persistent-data lvm2
 
 # Add Kubernetes repository
 printf " 
@@ -82,11 +87,6 @@ echo -n "Enter the Kubernetes version you wish to install: "
 read version
 
 
-# Update the package list and upgrade all packages
-yum update -y
-
-# Install necessary packages
-yum install -y yum-utils device-mapper-persistent-data lvm2
 
 #Install docker
 sudo yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
@@ -229,6 +229,14 @@ hostnamectl set-hostname \$hostname
 echo "`ip route get 1 | awk '{print \$NF;exit}'` \$hostname" >> /etc/hosts
 
 
+# Update the package list and upgrade all packages
+apt-get update -y
+apt-get -o upgrade -y
+
+# Install necessary packages
+apt-get install -y apt-transport-https
+apt-get update -y
+
 
 # Add Kubernetes repository
 curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add -
@@ -242,14 +250,6 @@ sudo apt-cache madison kubectl | awk '{print $3}' | sort -V | uniq | tail -n 10 
 echo -n "Enter the Kubernetes version you wish to install: "
 read version
 
-
-# Update the package list and upgrade all packages
-apt-get update -y
-apt-get -o upgrade -y
-
-# Install necessary packages
-apt-get install -y apt-transport-https
-apt-get update -y
 
 # Install docker
 apt-get install -y apt-transport-https ca-certificates curl software-properties-common
