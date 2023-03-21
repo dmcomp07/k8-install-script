@@ -85,6 +85,14 @@ sudo yum list kubeadm --showduplicates | grep kubeadm | awk '{print $2}' | sort 
 # Prompt user to enter desired version
 echo -n "Enter the Kubernetes version you wish to install: "
 read version
+echo -n " Version selected : \$version"
+# Confirm with the user before proceeding
+read -p "Do you want to proceed with the installation ? (y/n) " -n 1 -r
+echo   
+if [[ ! \$REPLY =~ ^[Yy]\$ ]]
+then
+    exit 1
+fi
 
 
 
