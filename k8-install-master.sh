@@ -309,6 +309,7 @@ kubectl apply -f https://docs.projectcalico.org/v3.25/manifests/calico.yaml
 kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v0.49.0/deploy/static/provider/baremetal/deploy.yaml
 
 
+
 #Cluster join link
 clear
 echo " Installation Successful 
