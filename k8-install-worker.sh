@@ -78,14 +78,6 @@ gpgkey=https://packages.cloud.google.com/yum/doc/yum-key.gpg
         https://packages.cloud.google.com/yum/doc/rpm-package-key.gpg
 " > /etc/yum.repos.d/kubernetes.repo
 
- # List available versions
-echo "Available Kubernetes versions Top 10:"
-sudo yum list kubectl --showduplicates | grep kubectl | awk '{print $2}' | sort -V | uniq | tail -n 10 | tac
-
-
-# Prompt user to enter desired version
-echo -n "Enter the Kubernetes version you wish to install: "
-read version
 
 # Update the package list and upgrade all packages
 yum update -y
@@ -124,7 +116,7 @@ sudo firewall-cmd --permanent --add-port=10255/tcp
 firewall-cmd --reload
 
 # Install Kubernetes components
-yum install -y kubelet=$version kubeadm=$version kubectl=$version
+yum install -y kubelet kubeadm kubectl
 
 # Enable and start kubelet service
 systemctl enable --now kubelet
@@ -211,12 +203,6 @@ echo "`ip route get 1 | awk '{print \$NF;exit}'` \$hostname" >> /etc/hosts
 curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add -
 echo "deb https://apt.kubernetes.io/ kubernetes-xenial main" | tee -a /etc/apt/sources.list.d/kubernetes.list
 
-# List available versions
-echo "Available Kubernetes versions Top 10:"
-sudo apt-cache madison kubectl | awk '{print $3}' | sort -V | uniq | tail -n 10 | tac
-# Prompt user to enter desired version
-echo -n "Enter the Kubernetes version you wish to install: "
-read version
 
 # Update the package list and upgrade all packages
 apt-get update -y
@@ -260,7 +246,7 @@ ufw reload
 
 
 # Install Kubernetes components
-apt-get install -y kubelet=$version kubeadm=$version kubectl=$version
+apt-get install -y kubelet kubeadm kubectl
 
 # Enable and start kubelet service
 systemctl enable --now kubelet
