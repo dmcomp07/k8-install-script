@@ -127,6 +127,10 @@ echo "Installing KIND version: $KIND_VERSION"
 curl -Lo ./kind "https://kind.sigs.k8s.io/dl/${KIND_VERSION}/kind-$(uname -s)-amd64"
 chmod +x ./kind
 sudo mv ./kind /usr/local/bin/kind
+if ! /usr/local/bin/kind --version &> /dev/null; then
+  echo "KIND binary not found or not executable, exiting."
+  exit 1
+fi
 
 # Confirm KIND install
 if ! command -v kind &> /dev/null; then
