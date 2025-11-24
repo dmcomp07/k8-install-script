@@ -62,7 +62,7 @@ sudo usermod -aG docker $USER
 newgrp docker
 
 # Install KIND CLI
-KIND_VERSION="v0.24.0"
+KIND_VERSION="v0.30.0"
 curl -Lo ./kind https://kind.sigs.k8s.io/dl/${KIND_VERSION}/kind-$(uname)-amd64
 chmod +x ./kind
 sudo mv ./kind /usr/local/bin/kind
